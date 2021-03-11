@@ -1,7 +1,18 @@
 <template>
     <div class="project">
-        <div class="action">
+        <div class="actions">
             <h3 @click="showDetails()">{{ dataProject.title }}</h3>
+            <div class="icons">
+                <span class="material-icons">
+                    edit
+                </span>
+                <span class="material-icons" @click="deleteProject()">
+                    delete
+                </span>
+                <span class="material-icons">
+                    done
+                </span>
+            </div>
         </div>
 
         <div class="details" v-if="isDetailShow">
@@ -30,6 +41,7 @@ export default {
         return {
             dataProject: this.project,
             isDetailShow: false,
+            urlRequest: `http://localhost:3000/projects/${this.project.id}`,
         };
     },
     setup() {
@@ -38,6 +50,29 @@ export default {
     methods: {
         showDetails() {
             this.isDetailShow = !this.isDetailShow;
+        },
+        async deleteProject() {
+            try {
+                const response = await fetch(this.urlRequest, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8',
+                    },
+                });
+
+                if (response.status === 200) {
+                    const result = await response.json();
+                    console.log(result);
+                    this.sendEventUpdateData();
+                } else {
+                    throw new Error(`Gagal melakukan request data ${response.status}`);
+                }
+            } catch (err) {
+                console.warn(err);
+            }
+        },
+        sendEventUpdateData() {
+            this.$emit('delete-event', { id: this.dataProject.id });
         },
     },
     watch: {
@@ -61,5 +96,22 @@ export default {
 }
 h3 {
     cursor: pointer;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.material-icons {
+    font-size: 24px;
+    margin-left: 10px;
+    color: #bbb;
+    cursor: pointer;
+}
+
+.material-icons:hover {
+    color: #777;
 }
 </style>

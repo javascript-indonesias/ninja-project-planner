@@ -2,7 +2,10 @@
     <div class="home">
         <div v-if="listPlanner.length > 0">
             <div v-for="planner in listPlanner" :key="planner.id">
-                <single-project :project="planner"></single-project>
+                <single-project
+                    :project="planner"
+                    @delete-event="handleDeleteEvent"
+                ></single-project>
             </div>
         </div>
     </div>
@@ -51,6 +54,18 @@ export default {
                 .catch((error) => {
                     console.warn(error);
                 });
+        },
+        handleDeleteEvent(data) {
+            const idProject = data.id;
+            const newListPlanner = this.listPlanner.reduce((accum, currentval) => {
+                const idCurrent = currentval.id;
+                if (idProject !== idCurrent) {
+                    accum.push(currentval);
+                }
+                return accum;
+            }, []);
+
+            this.listPlanner = newListPlanner;
         },
     },
     mounted() {
