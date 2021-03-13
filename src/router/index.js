@@ -7,11 +7,19 @@ const HomePageComponent = () => import(/* webpackChunkName: "homepage" */ '../vi
 const HomeComponent = () => import(/* webpackChunkName: "home" */ '../views/About.vue');
 const AboutComponent = () => import(/* webpackChunkName: "about" */ '../views/About.vue');
 
+const AddPlannerComponent = () =>
+    import(/* webpackChunkName: "addplanner" */ '../views/AddPlanner.vue');
+
 const routes = [
     {
         path: '/',
         name: 'Homepage',
         component: HomePageComponent,
+    },
+    {
+        path: '/add',
+        name: 'AddPlanner',
+        component: AddPlannerComponent,
     },
     {
         path: '/homes',

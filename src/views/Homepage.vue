@@ -5,6 +5,7 @@
                 <single-project
                     :project="planner"
                     @delete-event="handleDeleteEvent"
+                    @complete-event="handleUpdatePatchEvent"
                 ></single-project>
             </div>
         </div>
@@ -66,6 +67,19 @@ export default {
             }, []);
 
             this.listPlanner = newListPlanner;
+        },
+        handleDelete(data) {
+            this.listPlanner = this.listPlanner.filter((planner) => {
+                return planner.id !== data.id;
+            });
+        },
+        handleUpdatePatchEvent(data) {
+            // Melakukan update pada komponen array yang ditemukan
+            const plannerPatch = this.listPlanner.find((planner) => {
+                return planner.id === data.id;
+            });
+
+            plannerPatch.complete = !plannerPatch.complete;
         },
     },
     mounted() {

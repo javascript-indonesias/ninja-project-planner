@@ -1,5 +1,5 @@
 <template>
-    <div class="project">
+    <div class="project" :class="completeClassObject">
         <div class="actions">
             <h3 @click="showDetails()">{{ dataProject.title }}</h3>
             <div class="icons">
@@ -9,7 +9,7 @@
                 <span class="material-icons" @click="deleteProject()">
                     delete
                 </span>
-                <span class="material-icons">
+                <span class="material-icons tick" @click="toggleCompleteProject()">
                     done
                 </span>
             </div>
@@ -63,7 +63,7 @@ export default {
                 if (response.status === 200) {
                     const result = await response.json();
                     console.log(result);
-                    this.sendEventUpdateData();
+                    this.sendEventDeleteData();
                 } else {
                     throw new Error(`Gagal melakukan request data ${response.status}`);
                 }
@@ -71,8 +71,41 @@ export default {
                 console.warn(err);
             }
         },
-        sendEventUpdateData() {
+        async toggleCompleteProject() {
+            try {
+                const response = await fetch(this.urlRequest, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8',
+                    },
+                    body: JSON.stringify({
+                        complete: !this.dataProject.complete,
+                    }),
+                });
+
+                if (response.status === 200) {
+                    const result = await response.json();
+                    console.log(result);
+                    this.sendEventCompleteData();
+                } else {
+                    throw new Error(`Gagal melakukan request data ${response.status}`);
+                }
+            } catch (err) {
+                console.warn(err);
+            }
+        },
+        sendEventDeleteData() {
             this.$emit('delete-event', { id: this.dataProject.id });
+        },
+        sendEventCompleteData() {
+            this.$emit('complete-event', { id: this.dataProject.id });
+        },
+    },
+    computed: {
+        completeClassObject() {
+            return {
+                complete: this.dataProject.complete === true,
+            };
         },
     },
     watch: {
@@ -113,5 +146,13 @@ h3 {
 
 .material-icons:hover {
     color: #777;
+}
+
+// Completed projects
+.project.complete {
+    border-left: 4px solid #00ce89;
+}
+.project.complete .tick {
+    color: #00ce89;
 }
 </style>
