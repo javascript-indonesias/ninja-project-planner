@@ -10,6 +10,9 @@ const AboutComponent = () => import(/* webpackChunkName: "about" */ '../views/Ab
 const AddPlannerComponent = () =>
     import(/* webpackChunkName: "addplanner" */ '../views/AddPlanner.vue');
 
+const EditPlannerComponent = () =>
+    import(/* webpackChunkName: "editplanner" */ '../views/EditPlanner.vue');
+
 const routes = [
     {
         path: '/',
@@ -20,6 +23,12 @@ const routes = [
         path: '/add',
         name: 'AddPlanner',
         component: AddPlannerComponent,
+    },
+    {
+        path: '/edit/:id',
+        name: 'EditPlanner',
+        component: EditPlannerComponent,
+        props: true,
     },
     {
         path: '/homes',

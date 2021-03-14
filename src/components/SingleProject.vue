@@ -3,7 +3,7 @@
         <div class="actions">
             <h3 @click="showDetails()">{{ dataProject.title }}</h3>
             <div class="icons">
-                <span class="material-icons">
+                <span class="material-icons" @click="navigasiEditPlanner()">
                     edit
                 </span>
                 <span class="material-icons" @click="deleteProject()">
@@ -99,6 +99,14 @@ export default {
         },
         sendEventCompleteData() {
             this.$emit('complete-event', { id: this.dataProject.id });
+        },
+        navigasiEditPlanner() {
+            this.$router.push({
+                name: 'EditPlanner',
+                params: {
+                    id: this.dataProject.id,
+                },
+            });
         },
     },
     computed: {

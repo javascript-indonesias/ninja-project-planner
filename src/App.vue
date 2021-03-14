@@ -1,6 +1,20 @@
 <template>
+    <navbar></navbar>
     <router-view />
 </template>
+
+<script>
+import { defineAsyncComponent } from 'vue';
+
+const NavBarComponent = defineAsyncComponent(() => import('./components/Navbars.vue'));
+
+export default {
+    name: 'AppMain',
+    components: {
+        navbar: NavBarComponent,
+    },
+};
+</script>
 
 <style lang="scss">
 #app {
@@ -10,17 +24,4 @@
     margin: 0 auto;
     color: #555;
 }
-
-// #nav {
-//     padding: 30px;
-
-//     a {
-//         font-weight: bold;
-//         color: #2c3e50;
-
-//         &.router-link-exact-active {
-//             color: #42b983;
-//         }
-//     }
-// }
 </style>

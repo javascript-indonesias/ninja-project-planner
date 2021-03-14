@@ -10,25 +10,19 @@
       "id": 2,
       "title": "Make marketing email",
       "details": "Lorem ipsum",
-      "complete": false
+      "complete": true
     },
     {
       "id": 3,
       "title": "Create Figma Design",
       "details": "Lorem ipsum",
-      "complete": false
+      "complete": true
     },
     {
-      "title": "Vue JS dan JavaScript dasar",
-      "details": "Latihan belajar JavaScript dan Vue JS dengan lancar dan detail dari Net Ninja. Latihan belajar JavaScript dan Vue JS dengan lancar dan detail dari Net Ninja. Latihan belajar JavaScript dan Vue JS dengan lancar dan detail dari Net Ninja . Latihan belajar JavaScript dan Vue JS dengan lancar dan detail dari Net Ninja",
+      "title": "Membuat Project Plan",
+      "details": "Latihan membuat project plan dari Net Ninja Node JS",
       "complete": false,
-      "id": 5
-    },
-    {
-      "title": "Hello Ninja JS",
-      "details": "Latihan belajar JavaScript dan Vue JS dengan lancar dan detail dari Net Ninja",
-      "complete": false,
-      "id": 6
+      "id": 4
     }
   ]
 }
