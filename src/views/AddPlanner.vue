@@ -35,11 +35,38 @@ export default {
         return {
             stringTitle: '',
             stringDetails: '',
+            urlRequest: `http://localhost:3000/projects`,
         };
     },
     methods: {
-        sendDataSubmit() {
-            console.log(this.stringTitle, this.stringDetails);
+        async sendDataSubmit() {
+            // JSON Server otomatis menambahkan id ke dalam data
+            const projectItem = {
+                title: this.stringTitle,
+                details: this.stringDetails,
+                complete: false,
+            };
+            try {
+                const response = await fetch(this.urlRequest, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8',
+                    },
+                    body: JSON.stringify(projectItem),
+                });
+
+                // Navigasi ke halaman daftar planner
+                if (response.status >= 200 && response.status <= 205) {
+                    this.navigateToListPlanner();
+                } else {
+                    throw new Error(`Gagal mengirim planner terbaru ${response.status}`);
+                }
+            } catch (err) {
+                console.warn(err);
+            }
+        },
+        navigateToListPlanner() {
+            this.$router.replace({ name: 'Homepage' });
         },
     },
 };
