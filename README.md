@@ -1,6 +1,8 @@
 # Ninja Project Planner
 
-Aplikasi sederhana membuat routing halaman Vue JS dari course Net Ninja Udemy.
+![Alt Image](https://raw.githubusercontent.com/javascript-indonesias/ninja-project-planner/master/demo_app.png)
+
+Aplikasi sederhana membuat Project Planner Vue JS 3 dari course Net Ninja Udemy.
 
 Aplikasi Vue JS latihan dari course Udemy Net Ninja untuk TodoList seperti Project Planner [https://www.udemy.com/course/build-web-apps-with-vuejs-firebase/](https://www.udemy.com/course/build-web-apps-with-vuejs-firebase/)
 
