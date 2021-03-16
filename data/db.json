@@ -4,25 +4,31 @@
       "id": 1,
       "title": "Create new homepage banner",
       "details": "Lorem ipsum",
-      "complete": false
-    },
-    {
-      "id": 2,
-      "title": "Make marketing email",
-      "details": "Lorem ipsum",
       "complete": true
     },
     {
+      "id": 2,
+      "title": "Membuat Desain Sepeda Onthel Onthel",
+      "details": "Pengembang aplikasi lokal yang simpel dan sederhana tapi berguna. Suka main dengan penguin, tapi ga suka sama jendela. Suka menulis yang berbentuk objek dengan fungsi , dan tidak suka dengan sphpagheti.",
+      "complete": false
+    },
+    {
       "id": 3,
-      "title": "Create Figma Design",
-      "details": "Lorem ipsum",
+      "title": "Create Draw IO Design",
+      "details": "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum",
       "complete": true
     },
     {
       "title": "Membuat Project Plan",
       "details": "Latihan membuat project plan dari Net Ninja Node JS",
-      "complete": false,
+      "complete": true,
       "id": 4
+    },
+    {
+      "title": "Membuat Aplikasi Android",
+      "details": "Detail membuat aplikasi Android",
+      "complete": false,
+      "id": 5
     }
   ]
 }

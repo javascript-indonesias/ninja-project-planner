@@ -44,7 +44,11 @@ export default {
     methods: {
         async getDataProject() {
             try {
-                const response = await fetch(this.urlRequest);
+                const response = await fetch(this.urlRequest, {
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8',
+                    },
+                });
                 const result = await response.json();
                 console.log(result);
                 this.setDataEdit(result);
@@ -56,7 +60,33 @@ export default {
             this.stringTitle = result.title;
             this.stringDetails = result.details;
         },
-        sendDataSubmit() {},
+        async sendDataSubmit() {
+            try {
+                const response = await fetch(this.urlRequest, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8',
+                    },
+                    body: JSON.stringify({
+                        title: this.stringTitle,
+                        details: this.stringDetails,
+                    }),
+                });
+
+                if (response.status >= 200 || response.status <= 205) {
+                    const result = await response.json();
+                    console.log(result);
+                    this.navigateToListPlanner();
+                } else {
+                    throw new Error(`Gagal memperbarui data ${response.status}`);
+                }
+            } catch (err) {
+                console.warn(err);
+            }
+        },
+        navigateToListPlanner() {
+            this.$router.replace({ name: 'Homepage' });
+        },
     },
     mounted() {
         // Ambil project awalan

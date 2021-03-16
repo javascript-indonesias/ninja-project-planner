@@ -1,7 +1,11 @@
 <template>
     <div class="home">
+        <filter-nav
+            @filterChangeEvent="handleFilterChange"
+            :paramSortData="paramSortData"
+        ></filter-nav>
         <div v-if="listPlanner.length > 0">
-            <div v-for="planner in listPlanner" :key="planner.id">
+            <div v-for="planner in filteredProjects" :key="planner.id">
                 <single-project
                     :project="planner"
                     @delete-event="handleDeleteEvent"
@@ -19,10 +23,13 @@ const SingleProjectComponent = defineAsyncComponent(() =>
     import('../components/SingleProject.vue'),
 );
 
+const FilterComponent = defineAsyncComponent(() => import('../components/FilterNav.vue'));
+
 export default {
     name: 'HomepageComponent',
     components: {
         'single-project': SingleProjectComponent,
+        'filter-nav': FilterComponent,
     },
     setup() {
         return {};
@@ -30,6 +37,7 @@ export default {
     data() {
         return {
             listPlanner: [],
+            paramSortData: 'all',
         };
     },
     methods: {
@@ -80,6 +88,26 @@ export default {
             });
 
             plannerPatch.complete = !plannerPatch.complete;
+        },
+        handleFilterChange(filterchangedata) {
+            this.paramSortData = filterchangedata.paramfilter;
+        },
+    },
+    computed: {
+        filteredProjects() {
+            if (this.paramSortData === 'completed') {
+                return this.listPlanner.filter((planner) => {
+                    return planner.complete === true;
+                });
+            }
+
+            if (this.paramSortData === 'ongoing') {
+                return this.listPlanner.filter((planner) => {
+                    return planner.complete === false;
+                });
+            }
+
+            return this.listPlanner;
         },
     },
     mounted() {
